@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: menuItems
+    // Document ID: auto-generated
+    // Fields:
+    //   - name: string (required)
+    //   - category: string (required)
+    //   - price: string (required)
+    //   - desc: string (required)
+    //   - tag: string (optional)
+    //   - image: string (required)
+    //   - isSignature: boolean (optional)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.email == 'rohitk573134@gmail.com' && request.auth.token.email_verified == true;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidMenuItem(data) {
+      return hasOnlyAllowedFields(['name', 'category', 'price', 'desc', 'tag', 'image', 'isSignature']) &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             data.category is string && data.category.size() > 0 && data.category.size() < 50 &&
+             data.price is string && data.price.size() > 0 && data.price.size() < 20 &&
+             data.desc is string && data.desc.size() > 0 && data.desc.size() < 500 &&
+             data.image is string && data.image.size() > 0 && data.image.size() < 1000 &&
+             (!('tag' in data) || (data.tag is string && data.tag.size() <= 50)) &&
+             (!('isSignature' in data) || data.isSignature is bool);
+    }
+
+    match /menuItems/{itemId} {
+      // Public read access for the menu
+      allow read: if true;
+      
+      // Only admin can create, update, or delete
+      allow create: if isAdmin() && isValidMenuItem(request.resource.data);
+      allow update: if isAdmin() && isValidMenuItem(request.resource.data);
+      allow delete: if isAdmin();
+    }
+  }
+}
