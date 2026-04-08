@@ -43,10 +43,15 @@ function MainSite() {
         href="https://wa.me/918900902929?text=Hi%20Doiwala!%20I%20would%20like%20to%20place%20an%20order."
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 hover:shadow-[0_8px_30px_rgba(37,211,102,0.6)] transition-all duration-300"
+        className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-50 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_4px_20px_rgba(37,211,102,0.4)] hover:scale-110 hover:shadow-[0_8px_30px_rgba(37,211,102,0.6)] transition-all duration-300 p-2"
         aria-label="Chat on WhatsApp"
       >
-        <MessageCircle size={28} />
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+          alt="WhatsApp" 
+          className="w-full h-full object-contain"
+          referrerPolicy="no-referrer"
+        />
       </a>
 
       {/* Sticky Bottom CTA (Mobile Only) */}

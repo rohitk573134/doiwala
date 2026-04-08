@@ -41,7 +41,7 @@ export default function OrderSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
-            <div className="w-16 h-16 mb-4 rounded-full bg-[#fc8019] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 mb-4 rounded-2xl overflow-hidden flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 bg-[#fc8019] p-2">
               <img 
                 src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" 
                 alt="Swiggy" 
@@ -100,11 +100,11 @@ export default function OrderSection() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
-            <div className="w-16 h-16 mb-4 rounded-full bg-[#25D366] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 mb-4 rounded-full overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <img 
-                src="https://www.vectorlogo.zone/logos/whatsapp/whatsapp-icon.svg" 
+                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
                 alt="WhatsApp" 
-                className="w-full h-full object-contain brightness-0 invert" 
+                className="w-full h-full object-contain" 
                 referrerPolicy="no-referrer"
               />
             </div>
