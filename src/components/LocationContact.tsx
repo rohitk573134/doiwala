@@ -111,7 +111,7 @@ export default function LocationContact() {
               className="w-full h-[400px] lg:h-full min-h-[400px] rounded-3xl overflow-hidden shadow-xl border-4 border-[#fff8f0]"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.8647!2d92.7166!3d11.6441!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x308894459b1395b1%3A0x8e83b8b8b8b8b8b8!2sDoiwala!5e0!3m2!1sen!2sin!4v1712470000000!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.8716!2d92.7166666!3d11.6441666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x308894459b1395b1%3A0x269550e569947846!2sDoiwala%20Sweets%20%26%20Chaat%2C%20Port%20Blair!5e0!3m2!1sen!2sin!4v1712470000000!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

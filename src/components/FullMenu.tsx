@@ -4,7 +4,7 @@ import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useCart } from '../CartContext';
 
-const menuCategories = ['All', 'Chaat', 'Sweets', 'Snacks', 'Drinks'];
+const menuCategories = ['All', 'Chaat', 'Snacks'];
 
 export default function FullMenu() {
   const [activeCategory, setActiveCategory] = useState('All');

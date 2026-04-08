@@ -7,7 +7,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
           <div className="space-y-6">
-            <h3 className="font-serif text-3xl font-bold text-[#ff9933] tracking-wide">DOIWALA</h3>
+            <div className="flex flex-col">
+              <h3 className="font-serif text-3xl font-bold text-[#ff9933] tracking-wide leading-none">DOIWALA</h3>
+              <div className="flex items-center gap-2 mt-1 w-fit">
+                <div className="h-[1px] w-4 bg-[#ff9933]/30"></div>
+                <span className="text-sm font-script lowercase text-[#fff8f0]/80">dil se desi</span>
+                <div className="h-[1px] w-4 bg-[#ff9933]/30"></div>
+              </div>
+            </div>
             <p className="text-[#fff8f0]/70 text-sm leading-relaxed max-w-xs">
               Bringing the authentic taste of Kolkata's famous sweets and chaat to the beautiful islands of Andaman.
             </p>

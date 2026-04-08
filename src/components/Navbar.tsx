@@ -36,8 +36,17 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
-            <a href="#" className={`font-serif font-bold tracking-wide transition-all duration-500 ${isScrolled ? 'text-2xl text-[#ff9933]' : 'text-3xl text-white drop-shadow-md'}`}>
-              DOIWALA
+            <a href="#" className="flex flex-col group">
+              <span className={`font-serif font-bold tracking-wide leading-none transition-all duration-500 ${isScrolled ? 'text-2xl text-[#ff9933]' : 'text-3xl text-white drop-shadow-md'}`}>
+                DOIWALA
+              </span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <div className={`h-[1px] flex-1 transition-all duration-500 ${isScrolled ? 'bg-[#ff9933]/30' : 'bg-white/30'}`}></div>
+                <span className={`text-sm font-script lowercase transition-all duration-500 ${isScrolled ? 'text-[#3a2c2c]/70' : 'text-white/90 drop-shadow-sm'}`}>
+                  dil se desi
+                </span>
+                <div className={`h-[1px] flex-1 transition-all duration-500 ${isScrolled ? 'bg-[#ff9933]/30' : 'bg-white/30'}`}></div>
+              </div>
             </a>
           </div>
           

@@ -16,30 +16,29 @@ interface MenuItem {
   isSignature?: boolean;
 }
 
-const CATEGORIES = ['Chaat', 'Snacks', 'Sweets', 'Drinks'];
+const CATEGORIES = ['Chaat', 'Snacks'];
 
 // Initial data for seeding based on the provided menu image
 const INITIAL_DATA = [
+  // SNACKS
   { name: 'Ghee Samosa', category: 'Snacks', price: '₹30', desc: 'Crispy fried pastry with a savory filling of spiced potatoes and peas, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
   { name: 'Ghee Kachori', category: 'Snacks', price: '₹60', desc: 'Flaky, deep-fried pastry filled with a spiced lentil mixture, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Pani Puri Sooji Atta', category: 'Chaat', price: '₹60', desc: 'Crispy hollow puris made of semolina and flour, served with tangy spiced water.', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800', isSignature: true },
-  { name: 'Dahi Vada', category: 'Chaat', price: '₹120', desc: 'Soft lentil dumplings soaked in thick, creamy yogurt and topped with sweet & spicy chutneys.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: false },
   { name: 'Sambar Vada', category: 'Snacks', price: '₹120', desc: 'Savory lentil donuts soaked in a flavorful and spicy lentil soup (sambar).', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Creamy Bhalla Chaat', category: 'Chaat', price: '₹160', desc: 'Soft bhallas served with a generous topping of creamy yogurt and signature chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true },
+
+  // CHAAT
+  { name: 'Pani Puri Sooji Atta', category: 'Chaat', price: '₹60', desc: 'Crispy hollow puris made of semolina and flour, served with tangy spiced water.', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Bestseller' },
+  { name: 'Dahi Vada', category: 'Chaat', price: '₹120', desc: 'Soft lentil dumplings soaked in thick, creamy yogurt and topped with sweet & spicy chutneys.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: false },
+  { name: 'Creamy Bhalla Chaat', category: 'Chaat', price: '₹160', desc: 'Soft bhallas served with a generous topping of creamy yogurt and signature chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Must Try' },
   { name: 'Creamy Papri Chaat', category: 'Chaat', price: '₹160', desc: 'Crispy papris topped with potatoes, chickpeas, creamy yogurt, and tangy chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Creamy Bhalla Papri Chaat', category: 'Chaat', price: '₹180', desc: 'A delightful combination of soft bhallas and crispy papris with creamy yogurt.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true },
-  { name: 'Ghee Tikki with Chana', category: 'Chaat', price: '₹180', desc: 'Crispy potato patties fried in ghee, served with spicy chickpea curry.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true },
+  { name: 'Creamy Bhalla Papri Chaat', category: 'Chaat', price: '₹180', desc: 'A delightful combination of soft bhallas and crispy papris with creamy yogurt.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Popular' },
+  { name: 'Ghee Tikki with Chana', category: 'Chaat', price: '₹180', desc: 'Crispy potato patties fried in ghee, served with spicy chickpea curry.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Chef Special' },
   { name: 'Ghee Samosa Chaat', category: 'Chaat', price: '₹70', desc: 'Crushed ghee samosas topped with yogurt, chutneys, and fine sev.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
   { name: 'Ghee Kachori Chaat', category: 'Chaat', price: '₹100', desc: 'Crushed ghee kachoris topped with yogurt, chutneys, and spices.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
   { name: 'Ghee Samosa with Channa', category: 'Chaat', price: '₹90', desc: 'Ghee samosas served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
   { name: 'Ghee Kachori with Channa', category: 'Chaat', price: '₹120', desc: 'Ghee kachoris served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Raj Kachori', category: 'Chaat', price: '₹220', desc: 'The king of chaats! A large crispy kachori filled with a variety of snacks and chutneys.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: true },
+  { name: 'Raj Kachori', category: 'Chaat', price: '₹220', desc: 'The king of chaats! A large crispy kachori filled with a variety of snacks and chutneys.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Signature' },
   { name: 'Katori Chat', category: 'Chaat', price: '₹220', desc: 'Edible crispy baskets filled with a medley of potatoes, chickpeas, yogurt, and chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Spl Sagar Bhalla Chat', category: 'Chaat', price: '₹220', desc: 'Our special house-made bhalla chaat with premium ingredients and extra creaminess.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: true },
-  { name: 'Mishti Doi', category: 'Sweets', price: '₹80', desc: 'Traditional Bengali sweet fermented yogurt, creamy and delicious.', image: 'https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&q=80&w=800', isSignature: true },
-  { name: 'Gulab Jamun', category: 'Sweets', price: '₹40', desc: 'Soft, melt-in-your-mouth fried dumplings soaked in rose-scented sugar syrup.', image: 'https://images.unsplash.com/photo-1548943487-a2e4e43b4853?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Jalebi', category: 'Sweets', price: '₹50', desc: 'Crispy, deep-fried swirls of batter soaked in warm sugar syrup.', image: 'https://images.unsplash.com/photo-1589113103503-49675c88835b?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Kesaria Lassi', category: 'Drinks', price: '₹90', desc: 'Refreshing yogurt-based drink flavored with saffron and cardamom.', image: 'https://images.unsplash.com/photo-1596797038558-9da39b925493?auto=format&fit=crop&q=80&w=800', isSignature: false },
+  { name: 'Spl Sagar Bhalla Chat', category: 'Chaat', price: '₹220', desc: 'Our special house-made bhalla chaat with premium ingredients and extra creaminess.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'House Special' },
 ];
 
 export default function AdminDashboard() {
@@ -115,10 +114,13 @@ export default function AdminDashboard() {
   const handleSave = async () => {
     try {
       setError('');
+      // Create a copy of formData and remove the id field to avoid security rule violations
+      const { id, ...dataToSave } = formData as any;
+      
       if (editingId) {
-        await updateDoc(doc(db, 'menuItems', editingId), formData);
+        await updateDoc(doc(db, 'menuItems', editingId), dataToSave);
       } else {
-        await addDoc(collection(db, 'menuItems'), formData);
+        await addDoc(collection(db, 'menuItems'), dataToSave);
       }
       setEditingId(null);
       setIsAdding(false);

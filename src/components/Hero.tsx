@@ -56,10 +56,16 @@ export default function Hero() {
           className="max-w-4xl"
           style={{ opacity }}
         >
-          <span className="inline-flex items-center py-1 px-4 rounded-full bg-[#ff9933]/20 text-[#ff9933] font-medium text-sm tracking-widest uppercase mb-6 border border-[#ff9933]/30 backdrop-blur-sm">
+          <span className="inline-flex items-center py-1 px-4 rounded-full bg-[#ff9933]/20 text-[#ff9933] font-medium text-sm tracking-widest uppercase mb-4 border border-[#ff9933]/30 backdrop-blur-sm">
             <Star size={14} className="mr-2 fill-current" />
             100% Pure Veg • Authentic Taste
           </span>
+          
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="h-[1px] w-12 bg-white/30"></div>
+            <span className="text-2xl md:text-3xl font-script text-[#ff9933] lowercase drop-shadow-lg">dil se desi</span>
+            <div className="h-[1px] w-12 bg-white/30"></div>
+          </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg">
             Craving the <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff9933] to-[#ffd700] italic">Perfect</span> Bite?

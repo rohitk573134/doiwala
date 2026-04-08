@@ -42,9 +42,12 @@ export default function OrderSection() {
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
             <div className="w-16 h-16 mb-4 rounded-full bg-[#fc8019] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                <path d="M17.51 11.23c-.1-.13-.23-.23-.38-.28l-3.87-1.3c-.2-.07-.42-.07-.62 0l-3.87 1.3c-.15.05-.28.15-.38.28-.1.13-.15.29-.15.45v4.64c0 .16.05.32.15.45.1.13.23.23.38.28l3.87 1.3c.1.03.2.05.31.05s.21-.02.31-.05l3.87-1.3c.15-.05.28-.15.38-.28.1-.13.15-.29.15-.45v-4.64c0-.16-.05-.32-.15-.45zM12 16.64l-2.45-.82v-2.98l2.45.82 2.45-.82v2.98l-2.45.82zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-              </svg>
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" 
+                alt="Swiggy" 
+                className="w-full h-full object-contain brightness-0 invert" 
+                referrerPolicy="no-referrer"
+              />
             </div>
             <h3 className="font-serif font-bold text-xl text-[#3a2c2c] mb-1">Swiggy</h3>
             <p className="text-sm text-[#3a2c2c]/60 font-medium group-hover:text-[#fc8019] transition-colors">Order Now &rarr;</p>
@@ -61,9 +64,12 @@ export default function OrderSection() {
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
             <div className="w-16 h-16 mb-4 rounded-full bg-[#e23744] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-              </svg>
+              <img 
+                src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg" 
+                alt="Zomato" 
+                className="w-full h-full object-contain brightness-0 invert" 
+                referrerPolicy="no-referrer"
+              />
             </div>
             <h3 className="font-serif font-bold text-xl text-[#3a2c2c] mb-1">Zomato</h3>
             <p className="text-sm text-[#3a2c2c]/60 font-medium group-hover:text-[#e23744] transition-colors">Order Now &rarr;</p>
@@ -95,7 +101,12 @@ export default function OrderSection() {
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
             <div className="w-16 h-16 mb-4 rounded-full bg-[#25D366] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
-              <MessageCircle size={32} />
+              <img 
+                src="https://www.vectorlogo.zone/logos/whatsapp/whatsapp-icon.svg" 
+                alt="WhatsApp" 
+                className="w-full h-full object-contain brightness-0 invert" 
+                referrerPolicy="no-referrer"
+              />
             </div>
             <h3 className="font-serif font-bold text-xl text-[#3a2c2c] mb-1">WhatsApp</h3>
             <p className="text-sm text-[#3a2c2c]/60 font-medium group-hover:text-[#25D366] transition-colors">Chat with us</p>
