@@ -123,7 +123,7 @@ export default function CartSidebar() {
                   className="w-full py-4 bg-[#25D366] text-white font-bold rounded-2xl flex items-center justify-center gap-3 hover:bg-[#1eb956] transition-all shadow-lg shadow-green-200"
                 >
                   <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+                    src="https://cdn.simpleicons.org/whatsapp/white" 
                     alt="WhatsApp" 
                     className="w-5 h-5 object-contain"
                     referrerPolicy="no-referrer"

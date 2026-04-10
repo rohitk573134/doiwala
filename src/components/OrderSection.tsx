@@ -32,7 +32,7 @@ export default function OrderSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
           
           <motion.a
-            href="https://www.swiggy.com/search?query=Doiwala"
+            href="https://www.swiggy.com/city/port-blair/doiwala-sweets-south-andaman-school-line-rest792744"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
@@ -41,11 +41,11 @@ export default function OrderSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
-            <div className="w-16 h-16 mb-4 rounded-2xl overflow-hidden flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 bg-[#fc8019] p-2">
+            <div className="w-16 h-16 mb-4 rounded-2xl overflow-hidden flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-300 bg-[#fc8019] p-4">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" 
+                src="https://cdn.simpleicons.org/swiggy/white" 
                 alt="Swiggy" 
-                className="w-full h-full object-contain brightness-0 invert" 
+                className="w-full h-full object-contain" 
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -54,7 +54,7 @@ export default function OrderSection() {
           </motion.a>
 
           <motion.a
-            href="https://www.zomato.com/port-blair/restaurants?q=Doiwala"
+            href="https://www.zomato.com/port-blair/doiwala-sweets-port-blair-locality"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 30 }}
@@ -63,11 +63,11 @@ export default function OrderSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="group flex flex-col items-center justify-center p-8 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-4 border-transparent hover:border-white"
           >
-            <div className="w-16 h-16 mb-4 rounded-full bg-[#e23744] flex items-center justify-center text-white p-3 shadow-inner group-hover:scale-110 transition-transform duration-300">
+            <div className="w-16 h-16 mb-4 rounded-full bg-[#e23744] flex items-center justify-center text-white p-4 shadow-inner group-hover:scale-110 transition-transform duration-300">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg" 
+                src="https://cdn.simpleicons.org/zomato/white" 
                 alt="Zomato" 
-                className="w-full h-full object-contain brightness-0 invert" 
+                className="w-full h-full object-contain" 
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -102,7 +102,7 @@ export default function OrderSection() {
           >
             <div className="w-16 h-16 mb-4 rounded-full overflow-hidden flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
               <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+                src="https://cdn.simpleicons.org/whatsapp" 
                 alt="WhatsApp" 
                 className="w-full h-full object-contain" 
                 referrerPolicy="no-referrer"

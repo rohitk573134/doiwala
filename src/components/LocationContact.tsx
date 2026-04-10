@@ -49,7 +49,7 @@ export default function LocationContact() {
                   Sri Vijaya Puram, Andaman and Nicobar Islands 744103
                 </p>
                 <a
-                  href="https://www.google.com/maps/dir/?api=1&destination=Doiwala+Andaman+Port+Blair"
+                  href="https://www.google.com/maps/place/Doiwala/@11.6414435,92.7282822,20.91z/data=!4m6!3m5!1s0x3088957c425e27ad:0xf70723b51c18f9d4!8m2!3d11.641299!4d92.7282029!16s%2Fg%2F11l2xr5zf5?entry=ttu&g_ep=EgoyMDI2MDQwNy4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center mt-3 text-[#ff9933] font-medium text-sm hover:underline"
@@ -111,7 +111,7 @@ export default function LocationContact() {
               className="w-full h-[400px] lg:h-full min-h-[400px] rounded-3xl overflow-hidden shadow-xl border-4 border-[#fff8f0]"
             >
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.8716!2d92.7166666!3d11.6441666!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x308894459b1395b1%3A0x269550e569947846!2sDoiwala%20Sweets%20%26%20Chaat%2C%20Port%20Blair!5e0!3m2!1sen!2sin!4v1712470000000!5m2!1sen!2sin"
+                src="https://maps.google.com/maps?q=11.641299,92.7282029&hl=en&z=20&output=embed"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

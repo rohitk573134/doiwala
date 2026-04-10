@@ -40,13 +40,13 @@ export default function Footer() {
 
           <div>
             <h4 className="font-serif text-xl font-bold mb-6 text-white">Quick Links</h4>
-            <ul className="space-y-4 text-sm text-[#fff8f0]/70">
-              <li><a href="#home" className="hover:text-[#ff9933] transition-colors">Home</a></li>
-              <li><a href="#menu" className="hover:text-[#ff9933] transition-colors">Our Menu</a></li>
-              <li><a href="#why-us" className="hover:text-[#ff9933] transition-colors">Why Choose Us</a></li>
-              <li><a href="#testimonials" className="hover:text-[#ff9933] transition-colors">Reviews</a></li>
-              <li><a href="#gallery" className="hover:text-[#ff9933] transition-colors">Gallery</a></li>
-              <li><a href="#contact" className="hover:text-[#ff9933] transition-colors">Contact</a></li>
+            <ul className="space-y-4 text-sm text-[#fff8f0]/70 flex flex-col items-start">
+              <li><button onClick={() => document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Home</button></li>
+              <li><button onClick={() => document.getElementById('menu')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Our Menu</button></li>
+              <li><button onClick={() => document.getElementById('why-us')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Why Choose Us</button></li>
+              <li><button onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Reviews</button></li>
+              <li><button onClick={() => document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Gallery</button></li>
+              <li><button onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-[#ff9933] transition-colors">Contact</button></li>
             </ul>
           </div>
 

@@ -3,18 +3,18 @@ import { Star, StarHalf, Quote } from 'lucide-react';
 
 const row1Reviews = [
   { id: 1, name: 'WeweTu', location: 'Bengaluru, India', platform: 'Tripadvisor', rating: 5, text: 'Nice New Veg All time Snack place. We had an early lunch cum snacks at the place on the way to the airport. Great quality and authentic taste.' },
-  { id: 2, name: 'Rahul S.', location: 'Port Blair', platform: 'Google', rating: 5, text: 'The Rasmalai here is absolutely divine! Best in Andaman. Highly recommend visiting if you have a sweet tooth.' },
-  { id: 3, name: 'Priya M.', location: 'Mumbai', platform: 'Zomato', rating: 4, text: 'Great place for evening snacks. The Samosa Chaat is highly recommended. Very clean and hygienic environment.' },
-  { id: 4, name: 'Amit K.', location: 'Delhi', platform: 'Justdial', rating: 5, text: 'Authentic Bengali sweets in Port Blair. Very hygienic and clean. The staff is also very polite and quick.' },
-  { id: 5, name: 'Sneha V.', location: 'Chennai', platform: 'Tripadvisor', rating: 5, text: 'Loved the Pav Bhaji and Mishti Doi. A must-visit for vegetarians looking for quality food in the islands.' },
+  { id: 2, name: 'Abhishek Gupta', location: 'Port Blair', platform: 'Google', rating: 5, text: 'Best place for sweets and snacks in Port Blair. The Ghee Samosa and Raj Kachori are a must try. Very hygienic and well maintained.' },
+  { id: 3, name: 'Foodie_PB', location: 'Port Blair', platform: 'Zomato', rating: 5, text: 'Doiwala is a gem in Port Blair. Their snacks are always fresh. The samosas are the best in town, perfectly spiced and crispy.' },
+  { id: 4, name: 'Rahul', location: 'Port Blair', platform: 'Swiggy', rating: 5, text: 'Ordered Ghee Samosa and Jalebi. Both were hot and crispy when they arrived. Delivery was fast and the packaging was excellent.' },
+  { id: 5, name: 'Megha Sharma', location: 'Port Blair', platform: 'Google', rating: 4, text: 'Loved the Pani Puri and Dahi Bhalla. The place is very clean and well maintained. A bit crowded in the evenings but totally worth it.' },
 ];
 
 const row2Reviews = [
-  { id: 6, name: 'Local Guide', location: 'Port Blair', platform: 'Justdial', rating: 4, text: 'One of the best Indian Sweet Dealers in Port Blair. The sweets are fresh and the chaat is perfectly balanced.' },
-  { id: 7, name: 'Foodie Traveler', location: 'India', platform: 'Zomato', rating: 5, text: 'At Doiwala in Port Blair, every sweet bite is a journey to bliss, where the island\'s best flavors come to life.' },
-  { id: 8, name: 'Vikram T.', location: 'Kolkata', platform: 'Google', rating: 4, text: 'Good quality sweets, slightly crowded in the evenings but worth the wait. The packaging is excellent for travel.' },
-  { id: 9, name: 'Neha R.', location: 'Pune', platform: 'Zomato', rating: 5, text: 'Their Kaju Katli melts in your mouth. Perfect packaging for taking back home. Will definitely visit again!' },
-  { id: 10, name: 'Anjali D.', location: 'Hyderabad', platform: 'Justdial', rating: 5, text: 'Finally a pure veg place with amazing chaat options! The Pani Puri water was perfectly spiced and tangy.' },
+  { id: 6, name: 'Sandeep Kumar', location: 'Port Blair', platform: 'Google', rating: 5, text: 'Authentic taste of North Indian snacks. The sweets are fresh and delicious. Staff is very courteous and the service is quick.' },
+  { id: 7, name: 'Ananya', location: 'Port Blair', platform: 'Zomato', rating: 4, text: 'Great variety of sweets. The packaging is very good for long distance travel. The Kaju Katli is exceptionally good and fresh.' },
+  { id: 8, name: 'Rohan Das', location: 'Kolkata', platform: 'Google', rating: 5, text: 'The best Mishti Doi I\'ve had outside Kolkata. Truly authentic Bengali sweets. Their Rosogolla is also very soft and spongy.' },
+  { id: 9, name: 'Priya', location: 'Port Blair', platform: 'Swiggy', rating: 5, text: 'The Raj Kachori is huge and very filling. Perfectly balanced flavors of sweet, tangy and spicy. Highly recommended for chaat lovers.' },
+  { id: 10, name: 'Traveler_A', location: 'India', platform: 'Tripadvisor', rating: 4, text: 'Clean and tasty. Good for a quick bite before heading to the airport or jetty. The hygiene standards are very high compared to other local spots.' },
 ];
 
 export default function Testimonials() {

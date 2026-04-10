@@ -3,7 +3,9 @@ import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, onSnapshot } fr
 import { db, auth } from '../firebase';
 import { useAuth } from '../AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { Plus, Edit2, Trash2, LogOut, Save, X } from 'lucide-react';
+import { Plus, Edit2, Trash2, LogOut, Save, X, Image as ImageIcon, Utensils } from 'lucide-react';
+import ImageUpload from './ImageUpload';
+import GalleryManager from './GalleryManager';
 
 interface MenuItem {
   id: string;
@@ -21,29 +23,30 @@ const CATEGORIES = ['Chaat', 'Snacks'];
 // Initial data for seeding based on the provided menu image
 const INITIAL_DATA = [
   // SNACKS
-  { name: 'Ghee Samosa', category: 'Snacks', price: '₹30', desc: 'Crispy fried pastry with a savory filling of spiced potatoes and peas, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Ghee Kachori', category: 'Snacks', price: '₹60', desc: 'Flaky, deep-fried pastry filled with a spiced lentil mixture, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Sambar Vada', category: 'Snacks', price: '₹120', desc: 'Savory lentil donuts soaked in a flavorful and spicy lentil soup (sambar).', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: false },
+  { name: 'Ghee Samosa', category: 'Snacks', price: '₹30', desc: 'Crispy fried pastry with a savory filling of spiced potatoes and peas, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?w=800', isSignature: false },
+  { name: 'Ghee Kachori', category: 'Snacks', price: '₹60', desc: 'Flaky, deep-fried pastry filled with a spiced lentil mixture, prepared in pure ghee.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?w=800', isSignature: false },
+  { name: 'Sambar Vada', category: 'Snacks', price: '₹120', desc: 'Savory lentil donuts soaked in a flavorful and spicy lentil soup (sambar).', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?w=800', isSignature: false },
 
   // CHAAT
-  { name: 'Pani Puri Sooji Atta', category: 'Chaat', price: '₹60', desc: 'Crispy hollow puris made of semolina and flour, served with tangy spiced water.', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Bestseller' },
-  { name: 'Dahi Vada', category: 'Chaat', price: '₹120', desc: 'Soft lentil dumplings soaked in thick, creamy yogurt and topped with sweet & spicy chutneys.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Creamy Bhalla Chaat', category: 'Chaat', price: '₹160', desc: 'Soft bhallas served with a generous topping of creamy yogurt and signature chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Must Try' },
-  { name: 'Creamy Papri Chaat', category: 'Chaat', price: '₹160', desc: 'Crispy papris topped with potatoes, chickpeas, creamy yogurt, and tangy chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Creamy Bhalla Papri Chaat', category: 'Chaat', price: '₹180', desc: 'A delightful combination of soft bhallas and crispy papris with creamy yogurt.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Popular' },
-  { name: 'Ghee Tikki with Chana', category: 'Chaat', price: '₹180', desc: 'Crispy potato patties fried in ghee, served with spicy chickpea curry.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Chef Special' },
-  { name: 'Ghee Samosa Chaat', category: 'Chaat', price: '₹70', desc: 'Crushed ghee samosas topped with yogurt, chutneys, and fine sev.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Ghee Kachori Chaat', category: 'Chaat', price: '₹100', desc: 'Crushed ghee kachoris topped with yogurt, chutneys, and spices.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Ghee Samosa with Channa', category: 'Chaat', price: '₹90', desc: 'Ghee samosas served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Ghee Kachori with Channa', category: 'Chaat', price: '₹120', desc: 'Ghee kachoris served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Raj Kachori', category: 'Chaat', price: '₹220', desc: 'The king of chaats! A large crispy kachori filled with a variety of snacks and chutneys.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'Signature' },
-  { name: 'Katori Chat', category: 'Chaat', price: '₹220', desc: 'Edible crispy baskets filled with a medley of potatoes, chickpeas, yogurt, and chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?auto=format&fit=crop&q=80&w=800', isSignature: false },
-  { name: 'Spl Sagar Bhalla Chat', category: 'Chaat', price: '₹220', desc: 'Our special house-made bhalla chaat with premium ingredients and extra creaminess.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&q=80&w=800', isSignature: true, tag: 'House Special' },
+  { name: 'Pani Puri Sooji Atta', category: 'Chaat', price: '₹60', desc: 'Crispy hollow puris made of semolina and flour, served with tangy spiced water.', image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800', isSignature: true, tag: 'Bestseller' },
+  { name: 'Dahi Vada', category: 'Chaat', price: '₹120', desc: 'Soft lentil dumplings soaked in thick, creamy yogurt and topped with sweet & spicy chutneys.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?w=800', isSignature: false },
+  { name: 'Creamy Bhalla Chaat', category: 'Chaat', price: '₹160', desc: 'Soft bhallas served with a generous topping of creamy yogurt and signature chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?w=800', isSignature: true, tag: 'Must Try' },
+  { name: 'Creamy Papri Chaat', category: 'Chaat', price: '₹160', desc: 'Crispy papris topped with potatoes, chickpeas, creamy yogurt, and tangy chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?w=800', isSignature: false },
+  { name: 'Creamy Bhalla Papri Chaat', category: 'Chaat', price: '₹180', desc: 'A delightful combination of soft bhallas and crispy papris with creamy yogurt.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?w=800', isSignature: true, tag: 'Popular' },
+  { name: 'Ghee Tikki with Chana', category: 'Chaat', price: '₹180', desc: 'Crispy potato patties fried in ghee, served with spicy chickpea curry.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?w=800', isSignature: true, tag: 'Chef Special' },
+  { name: 'Ghee Samosa Chaat', category: 'Chaat', price: '₹70', desc: 'Crushed ghee samosas topped with yogurt, chutneys, and fine sev.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?w=800', isSignature: false },
+  { name: 'Ghee Kachori Chaat', category: 'Chaat', price: '₹100', desc: 'Crushed ghee kachoris topped with yogurt, chutneys, and spices.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?w=800', isSignature: false },
+  { name: 'Ghee Samosa with Channa', category: 'Chaat', price: '₹90', desc: 'Ghee samosas served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1601050690597-df056fb04791?w=800', isSignature: false },
+  { name: 'Ghee Kachori with Channa', category: 'Chaat', price: '₹120', desc: 'Ghee kachoris served with a side of spicy and flavorful chickpea curry.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?w=800', isSignature: false },
+  { name: 'Raj Kachori', category: 'Chaat', price: '₹220', desc: 'The king of chaats! A large crispy kachori filled with a variety of snacks and chutneys.', image: 'https://images.unsplash.com/photo-1626132646529-500637532537?w=800', isSignature: true, tag: 'Signature' },
+  { name: 'Katori Chat', category: 'Chaat', price: '₹220', desc: 'Edible crispy baskets filled with a medley of potatoes, chickpeas, yogurt, and chutneys.', image: 'https://images.unsplash.com/photo-1606491956689-2ea8c5119c85?w=800', isSignature: false },
+  { name: 'Spl Sagar Bhalla Chat', category: 'Chaat', price: '₹220', desc: 'Our special house-made bhalla chaat with premium ingredients and extra creaminess.', image: 'https://images.unsplash.com/photo-1630383249896-424e482df921?w=800', isSignature: true, tag: 'House Special' },
 ];
 
 export default function AdminDashboard() {
   const { user, isAdmin, loading } = useAuth();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState<'menu' | 'gallery'>('menu');
   const [items, setItems] = useState<MenuItem[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState<Partial<MenuItem>>({});
@@ -161,246 +164,459 @@ export default function AdminDashboard() {
   if (loading || !isAdmin) return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <nav className="bg-white shadow-sm">
+    <div className="min-h-screen bg-[#fcfcfc]">
+      <nav className="bg-white border-b border-gray-100 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+          <div className="flex justify-between h-20">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold text-gray-900">Samosa Admin Dashboard</h1>
+              <div className="bg-orange-100 p-2 rounded-xl mr-3">
+                <Utensils className="w-6 h-6 text-orange-600" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-900 leading-tight">Doiwala Admin</h1>
+                <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">Control Panel</p>
+              </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <a href="#/" className="text-sm text-orange-600 hover:text-orange-700 font-medium">Back to Site</a>
-              <span className="text-sm text-gray-500">{user?.email}</span>
-              <button
-                onClick={handleLogout}
-                className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 hover:text-gray-700 focus:outline-none transition"
+            <div className="flex items-center space-x-6">
+              <button 
+                onClick={() => navigate('/')}
+                className="text-sm text-gray-600 hover:text-orange-600 font-semibold transition-colors"
               >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
+                View Website
               </button>
+              <div className="h-8 w-px bg-gray-200"></div>
+              <div className="flex items-center gap-3">
+                <div className="text-right hidden sm:block">
+                  <p className="text-sm font-bold text-gray-900">Administrator</p>
+                  <p className="text-xs text-gray-500">{user?.email}</p>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="p-2.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                  title="Logout"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <main className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         {error && (
-          <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
-            <p className="text-sm text-red-700">{error}</p>
+          <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-8 rounded-r-xl shadow-sm">
+            <div className="flex items-center">
+              <X className="text-red-500 mr-3" size={20} />
+              <p className="text-sm text-red-700 font-medium">{error}</p>
+            </div>
           </div>
         )}
 
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Menu Items</h2>
-          <div className="space-x-3">
-            {items.length === 0 ? (
-              <button
-                onClick={handleSeedData}
-                className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-              >
-                Load Initial Data
-              </button>
-            ) : (
-              <button
-                onClick={() => setShowClearAllConfirm(true)}
-                className="inline-flex items-center px-4 py-2 border border-red-300 rounded-md shadow-sm text-sm font-medium text-red-700 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-              >
-                Clear All Data
-              </button>
-            )}
-            <button
-              onClick={startAdd}
-              className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              Add New Item
-            </button>
-          </div>
+        <div className="mb-8 bg-white p-1.5 rounded-2xl shadow-sm border border-gray-100 inline-flex">
+          <button
+            onClick={() => setActiveTab('menu')}
+            className={`flex items-center px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+              activeTab === 'menu'
+                ? 'bg-orange-600 text-white shadow-md shadow-orange-200'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Utensils className="w-4 h-4 mr-2" />
+            Menu Items
+          </button>
+          <button
+            onClick={() => setActiveTab('gallery')}
+            className={`flex items-center px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
+              activeTab === 'gallery'
+                ? 'bg-orange-600 text-white shadow-md shadow-orange-200'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <ImageIcon className="w-4 h-4 mr-2" />
+            Gallery
+          </button>
         </div>
 
-        {showClearAllConfirm && (
-          <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6 flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <Trash2 className="h-5 w-5 text-red-400" aria-hidden="true" />
+        {activeTab === 'gallery' ? (
+          <GalleryManager />
+        ) : (
+          <div className="space-y-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Menu Management</h2>
+                <p className="text-sm text-gray-500 mt-1">Add, edit or remove items from your digital menu.</p>
               </div>
-              <div className="ml-3">
-                <p className="text-sm text-red-700 font-bold">
-                  Are you sure you want to delete ALL menu items? This cannot be undone.
-                </p>
+              <div className="flex gap-3 w-full sm:w-auto">
+                {items.length === 0 ? (
+                  <button
+                    onClick={handleSeedData}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 border border-gray-200 rounded-xl text-sm font-bold text-gray-700 bg-white hover:bg-gray-50 transition-all shadow-sm"
+                  >
+                    Load Initial Data
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setShowClearAllConfirm(true)}
+                    className="flex-1 sm:flex-none inline-flex items-center justify-center px-4 py-2.5 border border-red-100 rounded-xl text-sm font-bold text-red-600 bg-red-50 hover:bg-red-100 transition-all"
+                  >
+                    Clear All
+                  </button>
+                )}
+                <button
+                  onClick={startAdd}
+                  className="flex-1 sm:flex-none inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-orange-600 hover:bg-orange-700 transition-all shadow-lg shadow-orange-200"
+                >
+                  <Plus className="w-4 h-4 mr-2" />
+                  Add New Item
+                </button>
               </div>
             </div>
-            <div className="flex gap-4">
-              <button
-                onClick={() => setShowClearAllConfirm(false)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleClearAll}
-                className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-md hover:bg-red-700"
-              >
-                Yes, Clear Everything
-              </button>
-            </div>
-          </div>
-        )}
 
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
-          <ul className="divide-y divide-gray-200">
-            {(isAdding || editingId) && (
-              <li className="p-4 bg-orange-50">
-                <div className="grid grid-cols-1 gap-y-4 gap-x-4 sm:grid-cols-6">
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Name</label>
-                    <input
-                      type="text"
-                      value={formData.name || ''}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    />
+            {showClearAllConfirm && (
+              <div className="bg-red-600 p-6 rounded-2xl shadow-xl text-white flex flex-col sm:flex-row items-center justify-between gap-6 animate-in fade-in slide-in-from-top-4">
+                <div className="flex items-center text-center sm:text-left">
+                  <div className="bg-white/20 p-3 rounded-full mr-4 hidden sm:block">
+                    <Trash2 className="h-6 w-6 text-white" />
                   </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Category</label>
-                    <select
-                      value={formData.category || 'Chaat'}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    >
-                      {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-                    </select>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Price (e.g. ₹210)</label>
-                    <input
-                      type="text"
-                      value={formData.price || ''}
-                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="sm:col-span-6">
-                    <label className="block text-sm font-medium text-gray-700">Description</label>
-                    <textarea
-                      value={formData.desc || ''}
-                      onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
-                      rows={2}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="sm:col-span-3">
-                    <label className="block text-sm font-medium text-gray-700">Image URL</label>
-                    <input
-                      type="text"
-                      value={formData.image || ''}
-                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">Tag (Optional)</label>
-                    <input
-                      type="text"
-                      value={formData.tag || ''}
-                      onChange={(e) => setFormData({ ...formData, tag: e.target.value })}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="sm:col-span-1 flex items-center mt-6">
-                    <input
-                      type="checkbox"
-                      id="isSignature"
-                      checked={formData.isSignature || false}
-                      onChange={(e) => setFormData({ ...formData, isSignature: e.target.checked })}
-                      className="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
-                    />
-                    <label htmlFor="isSignature" className="ml-2 block text-sm text-gray-900">
-                      Signature Item
-                    </label>
+                  <div>
+                    <p className="text-lg font-bold">Delete all menu items?</p>
+                    <p className="text-white/80 text-sm">This action is permanent and cannot be undone.</p>
                   </div>
                 </div>
-                <div className="mt-4 flex justify-end space-x-3">
+                <div className="flex gap-3 w-full sm:w-auto">
                   <button
-                    onClick={cancelEdit}
-                    className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    onClick={() => setShowClearAllConfirm(false)}
+                    className="flex-1 sm:flex-none px-6 py-2.5 text-sm font-bold text-white bg-white/10 hover:bg-white/20 rounded-xl transition-all"
                   >
-                    <X className="w-4 h-4 mr-2" />
                     Cancel
                   </button>
                   <button
-                    onClick={handleSave}
-                    className="inline-flex items-center px-3 py-2 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500"
+                    onClick={handleClearAll}
+                    className="flex-1 sm:flex-none px-6 py-2.5 text-sm font-bold text-red-600 bg-white hover:bg-gray-50 rounded-xl transition-all shadow-lg"
                   >
-                    <Save className="w-4 h-4 mr-2" />
-                    Save
+                    Yes, Delete All
                   </button>
                 </div>
-              </li>
+              </div>
             )}
 
-            {items.map((item) => (
-              <li key={item.id} className="p-4 hover:bg-gray-50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center min-w-0 gap-4">
-                    <img 
-                      src={item.image} 
-                      alt={item.name} 
-                      className="w-16 h-16 object-cover rounded-md" 
-                      referrerPolicy="no-referrer"
-                    />
-                    <div>
-                      <p className="text-sm font-medium text-orange-600 truncate">{item.name}</p>
-                      <p className="text-sm text-gray-500 truncate">{item.category} • {item.price}</p>
-                      {item.isSignature && <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-yellow-100 text-yellow-800 mt-1">Signature</span>}
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => startEdit(item)}
-                      className="p-2 text-gray-400 hover:text-orange-600 transition-colors"
-                    >
-                      <Edit2 className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => setDeleteConfirmId(item.id)}
-                      className="p-2 text-gray-400 hover:text-red-600 transition-colors"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+              <ul className="divide-y divide-gray-50">
+                {isAdding && (
+                  <li className="p-8 bg-orange-50/50 border-b border-orange-100 animate-in fade-in">
+                    <div className="max-w-4xl mx-auto">
+                      <div className="flex items-center justify-between mb-8">
+                        <h3 className="text-lg font-bold text-gray-900">
+                          Add New Menu Item
+                        </h3>
+                        <button onClick={cancelEdit} className="text-gray-400 hover:text-gray-600">
+                          <X size={24} />
+                        </button>
+                      </div>
 
-                {/* Inline Delete Confirmation */}
-                {deleteConfirmId === item.id && (
-                  <div className="mt-4 p-4 bg-red-50 rounded-md border border-red-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <p className="text-sm text-red-800 font-medium">Are you sure you want to delete this item?</p>
-                    <div className="flex gap-3">
-                      <button
-                        onClick={() => setDeleteConfirmId(null)}
-                        className="px-3 py-1.5 text-xs font-bold text-gray-600 bg-white border border-gray-300 rounded hover:bg-gray-50"
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="px-3 py-1.5 text-xs font-bold text-white bg-red-600 rounded hover:bg-red-700"
-                      >
-                        Confirm Delete
-                      </button>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Item Name</label>
+                            <input
+                              type="text"
+                              value={formData.name || ''}
+                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              placeholder="e.g. Special Ghee Samosa"
+                              className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                            />
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Category</label>
+                              <select
+                                value={formData.category || 'Chaat'}
+                                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none appearance-none"
+                              >
+                                {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Price</label>
+                              <input
+                                type="text"
+                                value={formData.price || ''}
+                                onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                                placeholder="₹00"
+                                className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Description</label>
+                            <textarea
+                              value={formData.desc || ''}
+                              onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
+                              rows={3}
+                              placeholder="Describe the taste and ingredients..."
+                              className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none resize-none"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Item Image</label>
+                            <ImageUpload 
+                              value={formData.image || ''} 
+                              onChange={(url) => setFormData({ ...formData, image: url as string })} 
+                            />
+                          </div>
+                          <div className="grid grid-cols-2 gap-4">
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Tag (Optional)</label>
+                              <input
+                                type="text"
+                                value={formData.tag || ''}
+                                onChange={(e) => setFormData({ ...formData, tag: e.target.value })}
+                                placeholder="e.g. Bestseller"
+                                className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                              />
+                            </div>
+                            <div className="flex items-center pt-8">
+                              <label className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  checked={formData.isSignature || false}
+                                  onChange={(e) => setFormData({ ...formData, isSignature: e.target.checked })}
+                                  className="sr-only peer"
+                                />
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+                                <span className="ml-3 text-sm font-bold text-gray-700">Signature Item</span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="mt-10 flex justify-end gap-4 border-t border-orange-100 pt-8">
+                        <button
+                          onClick={cancelEdit}
+                          className="px-8 py-3 text-sm font-bold text-gray-500 hover:text-gray-700 transition-colors"
+                        >
+                          Discard Changes
+                        </button>
+                        <button
+                          onClick={handleSave}
+                          className="px-10 py-3 rounded-xl text-sm font-bold text-white bg-orange-600 hover:bg-orange-700 transition-all shadow-lg shadow-orange-200 flex items-center"
+                        >
+                          <Save className="w-4 h-4 mr-2" />
+                          Save Item
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  </li>
                 )}
-              </li>
-            ))}
-            
-            {items.length === 0 && !isAdding && (
-              <li className="p-8 text-center text-gray-500">
-                No menu items found. Click "Load Initial Data" to populate the database.
-              </li>
-            )}
-          </ul>
-        </div>
+
+
+                {items.map((item) => (
+                  <li key={item.id} className={`group transition-all duration-200 ${editingId === item.id ? 'p-8 bg-orange-50/50 border-b border-orange-100' : 'p-5 hover:bg-gray-50'}`}>
+                    {editingId === item.id ? (
+                      <div className="max-w-4xl mx-auto animate-in fade-in">
+                        <div className="flex items-center justify-between mb-8">
+                          <h3 className="text-lg font-bold text-gray-900">Edit Menu Item</h3>
+                          <button onClick={cancelEdit} className="text-gray-400 hover:text-gray-600">
+                            <X size={24} />
+                          </button>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                          <div className="space-y-6">
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Item Name</label>
+                              <input
+                                type="text"
+                                value={formData.name || ''}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                placeholder="e.g. Special Ghee Samosa"
+                                className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Category</label>
+                                <select
+                                  value={formData.category || 'Chaat'}
+                                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                  className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none appearance-none"
+                                >
+                                  {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
+                                </select>
+                              </div>
+                              <div>
+                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Price</label>
+                                <input
+                                  type="text"
+                                  value={formData.price || ''}
+                                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                                  placeholder="₹00"
+                                  className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Description</label>
+                              <textarea
+                                value={formData.desc || ''}
+                                onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
+                                rows={3}
+                                placeholder="Describe the taste and ingredients..."
+                                className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none resize-none"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="space-y-6">
+                            <div>
+                              <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Item Image</label>
+                              <ImageUpload 
+                                value={formData.image || ''} 
+                                onChange={(url) => setFormData({ ...formData, image: url as string })} 
+                              />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Tag (Optional)</label>
+                                <input
+                                  type="text"
+                                  value={formData.tag || ''}
+                                  onChange={(e) => setFormData({ ...formData, tag: e.target.value })}
+                                  placeholder="e.g. Bestseller"
+                                  className="w-full bg-white border border-gray-200 rounded-xl py-3 px-4 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all outline-none"
+                                />
+                              </div>
+                              <div className="flex items-center pt-8">
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                  <input
+                                    type="checkbox"
+                                    checked={formData.isSignature || false}
+                                    onChange={(e) => setFormData({ ...formData, isSignature: e.target.checked })}
+                                    className="sr-only peer"
+                                  />
+                                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-orange-600"></div>
+                                  <span className="ml-3 text-sm font-bold text-gray-700">Signature Item</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-10 flex justify-end gap-4 border-t border-orange-100 pt-8">
+                          <button
+                            onClick={cancelEdit}
+                            className="px-8 py-3 text-sm font-bold text-gray-500 hover:text-gray-700 transition-colors"
+                          >
+                            Discard Changes
+                          </button>
+                          <button
+                            onClick={handleSave}
+                            className="px-10 py-3 rounded-xl text-sm font-bold text-white bg-orange-600 hover:bg-orange-700 transition-all shadow-lg shadow-orange-200 flex items-center"
+                          >
+                            <Save className="w-4 h-4 mr-2" />
+                            Update Item
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center min-w-0 gap-6">
+                            <div className="relative flex-shrink-0">
+                              <img 
+                                src={item.image} 
+                                alt={item.name} 
+                                className="w-20 h-20 object-cover rounded-2xl shadow-sm border border-gray-100" 
+                                referrerPolicy="no-referrer"
+                              />
+                              {item.isSignature && (
+                                <div className="absolute -top-2 -right-2 bg-yellow-400 text-white p-1 rounded-lg shadow-sm">
+                                  <Plus size={12} className="rotate-45" />
+                                </div>
+                              )}
+                            </div>
+                            <div className="min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <p className="text-lg font-bold text-gray-900 truncate">{item.name}</p>
+                                {item.tag && (
+                                  <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-orange-100 text-orange-700">
+                                    {item.tag}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-sm text-gray-500 font-medium mb-1">
+                                <span className="text-orange-600">{item.category}</span> • {item.price}
+                              </p>
+                              <p className="text-xs text-gray-400 line-clamp-1 max-w-md">{item.desc}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all">
+                            <button
+                              onClick={() => startEdit(item)}
+                              className="p-3 text-gray-400 hover:text-orange-600 hover:bg-orange-50 rounded-xl transition-all"
+                              title="Edit Item"
+                            >
+                              <Edit2 className="w-5 h-5" />
+                            </button>
+                            <button
+                              onClick={() => setDeleteConfirmId(item.id)}
+                              className="p-3 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                              title="Delete Item"
+                            >
+                              <Trash2 className="w-5 h-5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {deleteConfirmId === item.id && (
+                          <div className="mt-6 p-6 bg-red-50 rounded-2xl border border-red-100 flex flex-col sm:flex-row items-center justify-between gap-6 animate-in zoom-in-95">
+                            <div className="flex items-center">
+                              <div className="bg-red-100 p-2 rounded-full mr-4">
+                                <Trash2 className="h-5 w-5 text-red-600" />
+                              </div>
+                              <p className="text-sm text-red-900 font-bold">Delete "{item.name}" from menu?</p>
+                            </div>
+                            <div className="flex gap-3 w-full sm:w-auto">
+                              <button
+                                onClick={() => setDeleteConfirmId(null)}
+                                className="flex-1 sm:flex-none px-6 py-2 text-xs font-bold text-gray-500 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition-all"
+                              >
+                                Cancel
+                              </button>
+                              <button
+                                onClick={() => handleDelete(item.id)}
+                                className="flex-1 sm:flex-none px-6 py-2 text-xs font-bold text-white bg-red-600 rounded-xl hover:bg-red-700 transition-all shadow-lg shadow-red-100"
+                              >
+                                Confirm Delete
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </li>
+                ))}
+
+                
+                {items.length === 0 && !isAdding && (
+                  <li className="p-20 text-center">
+                    <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Utensils className="text-gray-300" size={32} />
+                    </div>
+                    <p className="text-gray-500 font-bold">No menu items found</p>
+                    <p className="text-gray-400 text-sm mt-1">Start by adding your first delicious item!</p>
+                  </li>
+                )}
+              </ul>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

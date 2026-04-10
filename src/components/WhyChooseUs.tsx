@@ -82,7 +82,7 @@ export default function WhyChooseUs() {
               className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white group"
             >
               <img
-                src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=1000&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=1000"
                 alt="Chef preparing sweets"
                 className="w-full h-full object-cover aspect-[4/5] group-hover:scale-105 transition-transform duration-700"
                 loading="lazy"

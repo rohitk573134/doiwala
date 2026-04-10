@@ -125,12 +125,12 @@ export default function FullMenu() {
         )}
         
         <div className="mt-16 text-center">
-          <a
-            href="#order"
+          <button
+            onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })}
             className="inline-flex items-center justify-center px-8 py-4 font-medium text-white bg-[#3a2c2c] rounded-full overflow-hidden transition-all duration-300 hover:bg-[#2a1f1f] hover:shadow-lg hover:-translate-y-1"
           >
             Order Online Now
-          </a>
+          </button>
         </div>
       </div>
     </section>

@@ -56,5 +56,12 @@ service cloud.firestore {
       allow update: if isAdmin() && isValidMenuItem(request.resource.data);
       allow delete: if isAdmin();
     }
+    match /settings/{settingId} {
+      // Public read access for settings (like gallery)
+      allow read: if true;
+      
+      // Only admin can create, update, or delete
+      allow create, update, delete: if isAdmin();
+    }
   }
 }

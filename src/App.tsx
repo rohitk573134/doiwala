@@ -47,7 +47,7 @@ function MainSite() {
         aria-label="Chat on WhatsApp"
       >
         <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+          src="https://cdn.simpleicons.org/whatsapp/white" 
           alt="WhatsApp" 
           className="w-full h-full object-contain"
           referrerPolicy="no-referrer"
@@ -60,13 +60,13 @@ function MainSite() {
           <span className="text-xs text-[#3a2c2c]/70 font-medium uppercase tracking-wider">Craving Sweets?</span>
           <span className="text-sm font-bold text-[#3a2c2c]">Order Now</span>
         </div>
-        <a
-          href="#order"
+        <button
+          onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })}
           className="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-[#ff9933] to-[#e68a2e] text-white font-bold rounded-full shadow-lg active:scale-95 transition-transform"
         >
           <ShoppingBag size={18} className="mr-2" />
           Order Online
-        </a>
+        </button>
       </div>
     </div>
   );

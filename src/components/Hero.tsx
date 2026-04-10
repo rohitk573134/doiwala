@@ -15,7 +15,7 @@ export default function Hero() {
         style={{ y: y1 }}
       >
         <motion.img
-          src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=2000&auto=format&fit=crop"
+          src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=2000"
           alt="Delicious Indian Sweets and Snacks"
           className="w-full h-full object-cover"
           animate={{ scale: [1, 1.05, 1] }}
@@ -76,19 +76,19 @@ export default function Hero() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-            <a
-              href="#order"
+            <button
+              onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })}
               className="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-gradient-to-r from-[#ff9933] to-[#e68a2e] rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,153,51,0.6)] hover:scale-105 w-full sm:w-auto text-lg"
             >
               <span className="mr-2 relative z-10">Order Now</span>
               <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform relative z-10" />
-            </a>
-            <a
-              href="#full-menu"
+            </button>
+            <button
+              onClick={() => document.getElementById('full-menu')?.scrollIntoView({ behavior: 'smooth' })}
               className="inline-flex items-center justify-center px-8 py-4 font-bold text-white bg-white/10 backdrop-blur-md border border-white/30 rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300 w-full sm:w-auto text-lg"
             >
               Explore Menu
-            </a>
+            </button>
           </div>
         </motion.div>
       </div>

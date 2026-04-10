@@ -53,20 +53,20 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
             {navLinks.map((link) => (
-              <a
+              <button
                 key={link.name}
-                href={link.href}
+                onClick={() => document.getElementById(link.href.substring(1))?.scrollIntoView({ behavior: 'smooth' })}
                 className={`font-medium transition-colors ${isScrolled ? 'text-[#3a2c2c] hover:text-[#ff9933]' : 'text-white/90 hover:text-white drop-shadow-sm'}`}
               >
                 {link.name}
-              </a>
+              </button>
             ))}
-            <a
-              href="#order"
+            <button
+              onClick={() => document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' })}
               className={`px-6 py-2.5 rounded-full font-bold transition-all duration-300 shadow-lg hover:scale-105 ${isScrolled ? 'bg-gradient-to-r from-[#ff9933] to-[#e68a2e] text-white' : 'bg-white text-[#ff9933] hover:bg-gray-50'}`}
             >
               Order Now
-            </a>
+            </button>
             <button
               onClick={() => setIsCartOpen(true)}
               className={`relative p-2 rounded-full transition-all duration-300 hover:scale-110 ${isScrolled ? 'text-[#3a2c2c] hover:bg-gray-100' : 'text-white hover:bg-white/10'}`}
@@ -120,22 +120,26 @@ export default function Navbar() {
           >
             <div className="px-4 pt-2 pb-6 space-y-1 flex flex-col">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block px-3 py-3 text-base font-medium text-[#3a2c2c] hover:text-[#ff9933] hover:bg-[#ff9933]/10 rounded-md"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    document.getElementById(link.href.substring(1))?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="block w-full text-left px-3 py-3 text-base font-medium text-[#3a2c2c] hover:text-[#ff9933] hover:bg-[#ff9933]/10 rounded-md"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
-              <a
-                href="#order"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block mt-4 text-center bg-[#ff9933] text-white px-6 py-3 rounded-full font-medium hover:bg-[#e68a2e] transition-colors shadow-md"
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  document.getElementById('order')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="block w-full mt-4 text-center bg-[#ff9933] text-white px-6 py-3 rounded-full font-medium hover:bg-[#e68a2e] transition-colors shadow-md"
               >
                 Order Now
-              </a>
+              </button>
               <button
                 onClick={() => {
                   setIsCartOpen(true);
